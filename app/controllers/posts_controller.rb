@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:edit, :update, :show, :delete]
+  # This authenticates admin whenever a post is to be created, updated or desroyed
+  before_action :authenticate_admin!, except: [:index, :show]
 
   # Index action to render all posts
   def index
@@ -51,9 +53,6 @@ class PostsController < ApplicationController
       flash[:alert] = "Error updating post!"
     end
   end
-
-  # This authenticates admin whenever a post is to be created, updated or desroyed
-  before_action :authenticate_admin!, excpet: [:index, :show]
 
   private
 
