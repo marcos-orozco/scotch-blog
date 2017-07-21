@@ -52,6 +52,9 @@ class PostsController < ApplicationController
     end
   end
 
+  # This authenticates admin whenever a post is to be created, updated or desroyed
+  before_action :authenticate_admin!, excpet: [:index, :show]
+
   private
 
   def post_params
